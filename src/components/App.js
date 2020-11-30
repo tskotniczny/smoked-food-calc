@@ -1,20 +1,47 @@
 import React, { Component } from 'react';
 import Meat from './Meat';
+import MeatTotal from './MeatTotal';
 
 class App extends Component{
 
-    state = { children: []}
+    state = { children: [], meatTotal: 0, meatProfit: 0, totalValue: 0, totalProfit: 0};
 
-    addMeatComponent = () => {
-        this.setState({children: [<Meat />, this.state.children]});
+
+    onMeatQuantityChange = (total) => {
+        var allTotal = this.state.totalValue + total;
+        
+        
+
+            this.setState({meatTotal: total});
+            this.setState({totalValue: allTotal});
+        
+            //console.log("total was empty or the same value");
         
     }
 
+    onMeatMyPriceChange = (profit) => {
+        
+            var allProfit = this.state.totalProfit + profit;
 
+        
+            this.setState({meatProfit: profit});
+            this.setState({totalProfit: allProfit});
+        
+        
+            //console.log("profit was empty or the same value");
+        
+    }
+
+    addMeatComponent = () => {
+        this.setState({children: [<Meat onMeatQuantityChange={this.onMeatQuantityChange} onMeatMyPriceChange={this.onMeatMyPriceChange}/>, this.state.children]});
+        console.log('added component');
+
+    }
 
     render() {
+        console.log("profit", this.state.meatProfit);
+        console.log("total", this.state.meatTotal);
 
-        console.log('count: ', this.state.counter);
 
         return (
             <div>
@@ -28,6 +55,7 @@ class App extends Component{
                    
                     {this.state.children.map(child => child)}
                 </div>
+                <p> Meat total: {this.state.totalValue} Meat profit: {this.state.totalProfit} </p>
                 
                 
 

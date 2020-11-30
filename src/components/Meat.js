@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MeatTotal from './MeatTotal';
 
 
 class Meat extends Component {
@@ -13,27 +14,31 @@ class Meat extends Component {
     handleMeatQuantityChange = e => {
         this.setState({ quantity: e.target.value});
         this.setState({ meatTotal: e.target.value * this.state.meatSelectValue});
+
     }
     
     handleMeatMyPriceChange = e => {
         this.setState({myPrice: e.target.value });
         this.setState({meatProfit: this.state.meatTotal - e.target.value * this.state.quantity});
+        
     }
 
+
     render(){
-        
-        console.log('quantity', this.state.quantity);
-        console.log('my price', this.state.myPrice);
+        var profit = this.state.meatProfit;
+        var total = this.state.meatTotal;
+
+        this.props.onMeatQuantityChange(total);
+        this.props.onMeatMyPriceChange(profit);
+
+        //console.log("next state total: ". nextState.meatTotal);
 
         return(
             <div>
-                <div style={{display: 'flex'}}>
+                <div style={{display: 'flex', flex: 60}}>
                     <p style={{margin: 10}} > Mieso </p>
                     <select id='dropdown' onChange={this.handleMeatDropdownChange} style={{margin: 10}}>
                         <option value="5" > 5</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
                     </select>
                     <input id='meatQuantity' 
                         onChange={this.handleMeatQuantityChange} 
@@ -49,7 +54,10 @@ class Meat extends Component {
                     </input>
                     <p style={{margin: 10}} >Mieso Suma: {this.state.meatTotal} </p>
                     <p style={{margin: 10}} >Mieso moj zysk: {this.state.meatProfit}  </p>
+                    
+                    {/* <MeatTotal meatTotal={this.state.meatTotal} meatProfit={this.state.meatProfit}/> */}
                 </div>
+                
             </div>
         )
     }
