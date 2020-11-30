@@ -4,22 +4,22 @@ import MeatTotal from './MeatTotal';
 
 class Meat extends Component {
 
-    state = { meatSelectValue: 5, quantity: 0, myPrice: 0, meatTotal: 0, meatProfit: 0}
+    state = { meatSelectValue: 5, meatQuantity: 0, myPrice: 0, meatTotal: 0, meatProfit: 0}
 
     handleMeatDropdownChange = e => {
-        this.setState({ meatSelectValue: e.target.value });
+        this.setState({ [e.target.name]: e.target.value });
     
     }
     
     handleMeatQuantityChange = e => {
-        this.setState({ quantity: e.target.value});
+        this.setState({ [e.target.name]: e.target.value});
         this.setState({ meatTotal: e.target.value * this.state.meatSelectValue});
 
     }
     
     handleMeatMyPriceChange = e => {
-        this.setState({myPrice: e.target.value });
-        this.setState({meatProfit: this.state.meatTotal - e.target.value * this.state.quantity});
+        this.setState({[e.target.name]: e.target.value });
+        this.setState({meatProfit: this.state.meatTotal - e.target.value * this.state.meatQuantity});
         
     }
 
@@ -37,16 +37,16 @@ class Meat extends Component {
             <div>
                 <div style={{display: 'flex', flex: 60}}>
                     <p style={{margin: 10}} > Mieso </p>
-                    <select id='dropdown' onChange={this.handleMeatDropdownChange} style={{margin: 10}}>
+                    <select name='meatSelectValue' onChange={this.handleMeatDropdownChange} style={{margin: 10}}>
                         <option value="5" > 5</option>
                     </select>
-                    <input id='meatQuantity' 
+                    <input name='meatQuantity' 
                         onChange={this.handleMeatQuantityChange} 
                         style={{margin: 10}} 
                         type='number' 
                         placeholder="Ilosc sztuk">
                     </input>
-                    <input id='meatProfit' 
+                    <input name='myPrice' 
                         onChange={this.handleMeatMyPriceChange} 
                         style={{margin: 10}} 
                         type='number' 
