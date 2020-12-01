@@ -52,8 +52,8 @@ class Meat extends Component {
                         type='number' 
                         placeholder="Moja cena za sztuke">
                     </input>
-                    <p style={{margin: 10}} >Mieso Suma: {this.state.meatTotal} </p>
-                    <p style={{margin: 10}} >Mieso moj zysk: {this.state.meatProfit}  </p>
+                    <p style={{margin: 10}} >Suma (mieso): {this.state.meatTotal} </p>
+                    <p style={{margin: 10}} >Profit (mieso): {this.state.meatProfit}  </p>
                     
                 </div>
                 

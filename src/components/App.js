@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Meat from './Meat';
+import Cheese from './Cheese';
 
 class App extends Component{
 
-    state = { children: [], meatTotal: 0, meatProfit: 0, totalValue: 0, totalProfit: 0};
+    state = { meat: [], cheese: [],  meatTotal: 0, meatProfit: 0, cheeseTotal: 0, cheeseProfit: 0, totalValue: 0, totalProfit: 0};
 
     baseState = this.state;
 
@@ -15,11 +16,18 @@ class App extends Component{
         this.setState({meatProfit: profit});
     }
 
+    onCheeseQuantityChange = (total) => {
+        this.setState({cheeseTotal: total});
+    }
+
+    onCheeseMyPriceChange = (profit) => {
+        this.setState({cheeseProfit: profit});
+    }
+
     calculateTotal = () => {
 
-        //
-        var allTotal = this.state.totalValue + this.state.meatTotal;
-        var allProfit = this.state.totalProfit + this.state.meatProfit;
+        var allTotal = this.state.totalValue + this.state.meatTotal + this.state.cheeseTotal;
+        var allProfit = this.state.totalProfit + this.state.meatProfit + this.state.cheeseProfit;
 
         this.setState({totalValue: allTotal});
         this.setState({totalProfit: allProfit});
@@ -30,7 +38,11 @@ class App extends Component{
     }
 
     addMeatComponent = () => {
-        this.setState({children: [<Meat onMeatQuantityChange={this.onMeatQuantityChange} onMeatMyPriceChange={this.onMeatMyPriceChange}/>, this.state.children]});
+        this.setState({meat: [<Meat onMeatQuantityChange={this.onMeatQuantityChange} onMeatMyPriceChange={this.onMeatMyPriceChange}/>, this.state.meat]});
+    }
+
+    addCheeseComponent = () => {
+        this.setState({cheese: [<Cheese onCheeseQuantityChange={this.onCheeseQuantityChange} onCheeseMyPriceChange={this.onCheeseMyPriceChange}/>, this.state.cheese]});
     }
 
     render() {
@@ -38,12 +50,14 @@ class App extends Component{
             <div>
                 <h1>Kalkulator do wedzenia</h1>
                 <div>
-                    <button style={{padding: 100}} className='addComponent' onClick={this.addMeatComponent} style={{width: 100, height: 100 }}>Dodaj mieso, ser lub ryby</button>
+                    <button style={{padding: 100}} className='addComponent' onClick={this.addMeatComponent} style={{width: 100, height: 100 }}>Mieso</button>
+                    <button style={{padding: 100}} className='addComponent' onClick={this.addCheeseComponent} style={{width: 100, height: 100 }}>Ser</button>
                 </div>
                 <div className='meatContainer'>
-                    {this.state.children.map(child => child)}
+                    {this.state.meat.map(child => child)}
+                    {this.state.cheese.map(child => child)}
                 </div>
-                <p> Meat total: {this.state.totalValue} Meat profit: {this.state.totalProfit} </p>
+                <p> Suma: {this.state.totalValue} Profit: {this.state.totalProfit} </p>
                 <button onClick={this.calculateTotal}>Policz </button>
                 <button onClick={this.reset}>Reset </button>
                 
