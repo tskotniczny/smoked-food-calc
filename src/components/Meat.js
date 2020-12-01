@@ -1,44 +1,44 @@
 import React, { Component } from 'react';
-import MeatTotal from './MeatTotal';
 
 
 class Meat extends Component {
 
-    state = { meatSelectValue: 5, meatQuantity: 0, myPrice: 0, meatTotal: 0, meatProfit: 0}
+    state = { meatSelectValue: 35, meatQuantity: 0, myPrice: 0, meatTotal: 0, meatProfit: 0}
 
     handleMeatDropdownChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({ meatSelectValue: e.target.value });
     
     }
     
     handleMeatQuantityChange = e => {
-        this.setState({ [e.target.name]: e.target.value});
-        this.setState({ meatTotal: e.target.value * this.state.meatSelectValue});
+        this.setState({ meatQuantity: e.target.value});
+
+        var meatTotal = e.target.value * this.state.meatSelectValue
+        this.setState({ meatTotal: meatTotal});
+
+        this.props.onMeatQuantityChange(meatTotal);
 
     }
     
     handleMeatMyPriceChange = e => {
-        this.setState({[e.target.name]: e.target.value });
-        this.setState({meatProfit: this.state.meatTotal - e.target.value * this.state.meatQuantity});
-        
+        this.setState({myPrice: e.target.value });
+
+        var meatTotalProfit = this.state.meatTotal - e.target.value * this.state.meatQuantity;
+        this.setState({meatProfit: meatTotalProfit});
+
+        this.props.onMeatMyPriceChange(meatTotalProfit);
     }
 
-
     render(){
-        var profit = this.state.meatProfit;
-        var total = this.state.meatTotal;
-
-        this.props.onMeatQuantityChange(total);
-        this.props.onMeatMyPriceChange(profit);
-
-        //console.log("next state total: ". nextState.meatTotal);
-
         return(
             <div>
                 <div style={{display: 'flex', flex: 60}}>
                     <p style={{margin: 10}} > Mieso </p>
                     <select name='meatSelectValue' onChange={this.handleMeatDropdownChange} style={{margin: 10}}>
-                        <option value="5" > 5</option>
+                        <option value="35" > Schab </option>
+                        <option value="35" > Boczek </option>
+                        <option value="35" > Karczek </option>
+                        <option value="30" > Poledwica </option>
                     </select>
                     <input name='meatQuantity' 
                         onChange={this.handleMeatQuantityChange} 
@@ -55,7 +55,6 @@ class Meat extends Component {
                     <p style={{margin: 10}} >Mieso Suma: {this.state.meatTotal} </p>
                     <p style={{margin: 10}} >Mieso moj zysk: {this.state.meatProfit}  </p>
                     
-                    {/* <MeatTotal meatTotal={this.state.meatTotal} meatProfit={this.state.meatProfit}/> */}
                 </div>
                 
             </div>

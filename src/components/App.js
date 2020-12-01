@@ -1,45 +1,39 @@
 import React, { Component } from 'react';
 import Meat from './Meat';
-import MeatTotal from './MeatTotal';
 
 class App extends Component{
 
     state = { children: [], meatTotal: 0, meatProfit: 0, totalValue: 0, totalProfit: 0};
 
+    baseState = this.state;
 
     onMeatQuantityChange = (total) => {
-        var allTotal = this.state.totalValue + total;
-        
         this.setState({meatTotal: total});
-        this.setState({totalValue: allTotal});
-        
-            //console.log("total was empty or the same value");
-        
     }
 
     onMeatMyPriceChange = (profit) => {
-        
-        var allProfit = this.state.totalProfit + profit;
-        
         this.setState({meatProfit: profit});
+    }
+
+    calculateTotal = () => {
+
+        //
+        var allTotal = this.state.totalValue + this.state.meatTotal;
+        var allProfit = this.state.totalProfit + this.state.meatProfit;
+
+        this.setState({totalValue: allTotal});
         this.setState({totalProfit: allProfit});
-        
-        
-            //console.log("profit was empty or the same value");
-        
+    }
+
+    reset = () => {
+        this.setState(this.baseState);
     }
 
     addMeatComponent = () => {
         this.setState({children: [<Meat onMeatQuantityChange={this.onMeatQuantityChange} onMeatMyPriceChange={this.onMeatMyPriceChange}/>, this.state.children]});
-        console.log('added component');
-
     }
 
     render() {
-        console.log("profit", this.state.meatProfit);
-        console.log("total", this.state.meatTotal);
-
-
         return (
             <div>
                 <h1>Kalkulator do wedzenia</h1>
@@ -47,13 +41,12 @@ class App extends Component{
                     <button style={{padding: 100}} className='addComponent' onClick={this.addMeatComponent} style={{width: 100, height: 100 }}>Dodaj mieso, ser lub ryby</button>
                 </div>
                 <div className='meatContainer'>
-                   
                     {this.state.children.map(child => child)}
                 </div>
                 <p> Meat total: {this.state.totalValue} Meat profit: {this.state.totalProfit} </p>
+                <button onClick={this.calculateTotal}>Policz </button>
+                <button onClick={this.reset}>Reset </button>
                 
-                
-
             </div>
         )
     }
