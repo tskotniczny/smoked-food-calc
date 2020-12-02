@@ -56,8 +56,8 @@ class Cheese extends Component {
                         type='number' 
                         placeholder="Moja cena za sztuke">
                     </input>
-                    <p style={{margin: 10}} >Suma (ser): {this.state.cheeseTotal} </p>
-                    <p style={{margin: 10}} >Profit (ser): {this.state.cheeseProfit}  </p>
+                    <p id='total' style={{margin: 10}} > Suma do zaplaty: {this.state.cheeseTotal} </p>
+                    <p id='profit' style={{margin: 10}} > Moj zysk: {this.state.cheeseProfit}  </p>
                     
                 </div>
                 

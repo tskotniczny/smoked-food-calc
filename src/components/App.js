@@ -12,6 +12,11 @@ class App extends Component{
         this.setState({meatTotal: total});
     }
 
+    // componentDidMount() {
+    //     // Calculates the total after component is mounted
+    //     this.setState({ totalValue: this.calculateTotal(this.state.meatValues) });
+    //   }
+
     onMeatMyPriceChange = (profit) => {
         this.setState({meatProfit: profit});
     }
@@ -26,11 +31,27 @@ class App extends Component{
 
     calculateTotal = () => {
 
-        var allTotal = this.state.totalValue + this.state.meatTotal + this.state.cheeseTotal;
-        var allProfit = this.state.totalProfit + this.state.meatProfit + this.state.cheeseProfit;
+        //For now using a JS solution until I find a more 'Reacty' way to do it (redux for better data flow?)
 
-        this.setState({totalValue: allTotal});
-        this.setState({totalProfit: allProfit});
+        // Grab all inputs that start with ID 'comp'
+        let inputsTotal = document.querySelectorAll('[id="total"]');
+        let inputsProfit = document.querySelectorAll('[id="profit"]');
+
+        // Trying to loop through the values and get the sum of all inputs
+        let totalValue=0
+        for (var i = 0; i < inputsTotal.length; i++) {
+            totalValue += parseInt(inputsTotal[i].innerHTML.replace(/\D/g,''))
+        }
+
+        let totalProfit=0
+        for (var i = 0; i < inputsProfit.length; i++) {
+            totalProfit += parseInt(inputsProfit[i].innerHTML.replace(/\D/g,''))
+        }
+
+        
+        this.setState({totalValue: totalValue});
+        this.setState({totalProfit: totalProfit});
+
     }
 
     reset = () => {
@@ -46,6 +67,7 @@ class App extends Component{
     }
 
     render() {
+
         return (
             <div>
                 <h1>Kalkulator do wedzenia</h1>
