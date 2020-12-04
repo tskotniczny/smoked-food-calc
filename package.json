@@ -1,5 +1,5 @@
 {
-  "name": "music-master",
+  "name": "smoked-food-calc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,8 @@
     "start": "npm run build && live-server dist",
     "heroku-postbuild": "parcel build src/index.html",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "clean" : "gh-pages-clean"
   },
   "keywords": [],
   "author": "",
