@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://tskotniczny.github.io/smoked-food-calc", 
+  "homepage": ".", 
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
