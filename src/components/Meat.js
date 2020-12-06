@@ -16,8 +16,6 @@ class Meat extends Component {
         var meatTotal = e.target.value * this.state.meatSelectValue
         this.setState({ meatTotal: meatTotal});
 
-        this.props.onMeatQuantityChange(meatTotal);
-
     }
     
     handleMeatMyPriceChange = e => {
@@ -25,8 +23,6 @@ class Meat extends Component {
 
         var meatTotalProfit = this.state.meatTotal - e.target.value * this.state.meatQuantity;
         this.setState({meatProfit: meatTotalProfit});
-
-        this.props.onMeatMyPriceChange(meatTotalProfit);
     }
 
     render(){

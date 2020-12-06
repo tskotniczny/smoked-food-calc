@@ -8,32 +8,11 @@ class App extends Component{
 
     baseState = this.state;
 
-    onMeatQuantityChange = (total) => {
-        this.setState({meatTotal: total});
-    }
-
-    // componentDidMount() {
-    //     // Calculates the total after component is mounted
-    //     this.setState({ totalValue: this.calculateTotal(this.state.meatValues) });
-    //   }
-
-    onMeatMyPriceChange = (profit) => {
-        this.setState({meatProfit: profit});
-    }
-
-    onCheeseQuantityChange = (total) => {
-        this.setState({cheeseTotal: total});
-    }
-
-    onCheeseMyPriceChange = (profit) => {
-        this.setState({cheeseProfit: profit});
-    }
-
     calculateTotal = () => {
 
         //For now using a JS solution until I find a more 'Reacty' way to do it (redux for better data flow?)
 
-        // Grab all inputs that start with ID 'comp'
+        // Grab all inputs that start with ID 'total/profit'
         let inputsTotal = document.querySelectorAll('[id="total"]');
         let inputsProfit = document.querySelectorAll('[id="profit"]');
 
@@ -59,11 +38,11 @@ class App extends Component{
     }
 
     addMeatComponent = () => {
-        this.setState({meat: [<Meat onMeatQuantityChange={this.onMeatQuantityChange} onMeatMyPriceChange={this.onMeatMyPriceChange}/>, this.state.meat]});
+        this.setState({meat: [<Meat />, this.state.meat]});
     }
 
     addCheeseComponent = () => {
-        this.setState({cheese: [<Cheese onCheeseQuantityChange={this.onCheeseQuantityChange} onCheeseMyPriceChange={this.onCheeseMyPriceChange}/>, this.state.cheese]});
+        this.setState({cheese: [<Cheese />, this.state.cheese]});
     }
 
     render() {
@@ -82,7 +61,6 @@ class App extends Component{
                 <p> Suma: {this.state.totalValue} Profit: {this.state.totalProfit} </p>
                 <button onClick={this.calculateTotal}>Policz </button>
                 <button onClick={this.reset}>Reset </button>
-                
             </div>
         )
     }

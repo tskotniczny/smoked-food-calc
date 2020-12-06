@@ -15,9 +15,6 @@ class Cheese extends Component {
 
         var cheeseTotal = e.target.value * this.state.cheeseSelectValue
         this.setState({ cheeseTotal: cheeseTotal});
-
-        this.props.onCheeseQuantityChange(cheeseTotal);
-
     }
     
     handleCheeseMyPriceChange = e => {
@@ -25,8 +22,6 @@ class Cheese extends Component {
 
         var meatTotalProfit = this.state.cheeseTotal - e.target.value * this.state.cheeseQuantity;
         this.setState({cheeseProfit: meatTotalProfit});
-
-        this.props.onCheeseMyPriceChange(meatTotalProfit);
     }
 
     render(){
